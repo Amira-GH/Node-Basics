@@ -87,5 +87,5 @@ startApp("Amira Ghraizy")
 * @returns {void}
 */
 function help() {
-  console.log('hello\nquit\nexit')
+  console.log('pssible command lines: \nhello ---> says hello!\nhello X ----> says hello X!\nquit ---> quits the application\nexit ---> exits the application')
 }
