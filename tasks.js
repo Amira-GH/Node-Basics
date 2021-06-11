@@ -43,6 +43,9 @@ function onDataReceived(text) {
   else if (text === 'help\n') {
     help();
   }
+  else if (text === 'list\n'){
+    list();
+  }
   else {
     unknownCommand(text);
   }
@@ -88,4 +91,8 @@ startApp("Amira Ghraizy")
 */
 function help() {
   console.log('pssible command lines: \nhello ---> says hello!\nhello X ----> says hello X!\nquit ---> quits the application\nexit ---> exits the application')
+}
+
+function list(){
+  console.log('To Do List:\ntask 1\ntask 2\ntask 3\n');
 }
