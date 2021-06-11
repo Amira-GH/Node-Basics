@@ -52,6 +52,9 @@ function onDataReceived(text) {
   else if(text.slice(0,6)==='remove'){
     remove(text.slice(6));
   }
+  else if(text.slice(0,4)==='edit'){
+    edit(text.slice(5));
+  }
   else {
     unknownCommand(text);
   }
@@ -120,3 +123,18 @@ function remove(text) {
   }
 }
 
+function edit(text){
+  if(text == ""){
+    console.log("Error. You can't edit anything");
+  }
+  else if(text.charAt(0) == parseInt('1')){
+    arrayList.splice(0,2,text);
+  }
+  else if(typeof text.charAt(0) === "string"){
+      arrayList.pop();
+      arrayList.push(text);
+  }
+  else if(typeof text.charAt(1) === "string"){
+    arrayList.shift();
+}
+}
