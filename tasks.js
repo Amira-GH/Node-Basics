@@ -49,6 +49,9 @@ function onDataReceived(text) {
   else if (text.split(' ')[0].trim() === 'add'){
     add(text.split(' ')[1]);
   }
+  else if(text.slice(0,6)==='remove'){
+    remove(text.slice(6));
+  }
   else {
     unknownCommand(text);
   }
@@ -106,4 +109,19 @@ function list(){
 
 function add(text){
   arrayList.push(text);
+}
+
+function remove(text){
+  text = text.trim();
+  if(text<=arrayList.length){
+       if(text == ""){
+          arrayList.pop();
+  }
+  else if(text == "1"){
+    arrayList.shift();
+  }
+  else if(text == "2"){
+    arrayList.splice(1,1);
+    }
+  }
 }
