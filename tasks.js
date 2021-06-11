@@ -46,6 +46,9 @@ function onDataReceived(text) {
   else if (text === 'list\n'){
     list();
   }
+  else if (text.split(' ')[0].trim() === 'add'){
+    add(text.split(' ')[1]);
+  }
   else {
     unknownCommand(text);
   }
@@ -93,6 +96,14 @@ function help() {
   console.log('pssible command lines: \nhello ---> says hello!\nhello X ----> says hello X!\nquit ---> quits the application\nexit ---> exits the application')
 }
 
+const arrayList= ["T1", " T2", " T3"]
+
 function list(){
-  console.log('To Do List:\ntask 1\ntask 2\ntask 3\n');
+   let x = arrayList.map(x => x+"\n")
+   let y = x.toString().split(",").join("").trim()
+   console.log('To Do List:\n',y)
+}
+
+function add(text){
+  arrayList.push(text);
 }
