@@ -96,7 +96,7 @@ startApp("Amira Ghraizy")
 * @returns {void}
 */
 function help() {
-  console.log('pssible command lines: \nhello ---> says hello!\nhello X ----> says hello X!\nquit ---> quits the application\nexit ---> exits the application')
+  console.log('pssible command lines: \nhello ---> says hello!\nhello X ----> says hello X!\nquit ---> quits the application\nexit ---> exits the application\nadd ---> adds a new task\nremove ---> removes a task\nlist --->lists all tasks')
 }
 
 const arrayList= ["T1", " T2", " T3"]
