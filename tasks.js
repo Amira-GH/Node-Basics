@@ -111,20 +111,12 @@ function add(text){
   arrayList.push(text);
 }
 
-function remove(text){
-  text = text.trim();
-  if(text<=arrayList.length){
-       if(text == ""){
-          arrayList.pop();
-  }
-  else if(text == "1"){
-    arrayList.shift();
-  }
-  else if(text == "2"){
-    arrayList.splice(1,1);
-    }
-  else if(text>=arrayList.length){
+function remove(text) {
+  if (arrayList.length <= text) {
     console.log("Error. You entered a number greater than length of the list");
-   }
+  } 
+  else {
+    arrayList.splice(text + 1, 1);
   }
 }
+
