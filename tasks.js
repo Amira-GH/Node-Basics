@@ -84,6 +84,9 @@ function quit(){
 // The following line starts the application
 startApp("Amira Ghraizy")
 
+/**list of all the possible commands 
+* @returns {void}
+*/
 function help(){
   console.log('hello\nquit\nexit')
 }
