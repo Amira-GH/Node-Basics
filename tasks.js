@@ -123,5 +123,8 @@ function remove(text){
   else if(text == "2"){
     arrayList.splice(1,1);
     }
+  else if(text>=arrayList.length){
+    console.log("Error. You entered a number greater than length of the list");
+   }
   }
 }
