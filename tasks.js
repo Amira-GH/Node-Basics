@@ -18,6 +18,7 @@ function startApp(name) {
 }
 
 
+
 /**
  * Decides what to do depending on the data that was received
  * This function receives the input sent by the user.
@@ -33,30 +34,36 @@ function startApp(name) {
  * @param  {string} text data typed by the user
  * @returns {void}
  */
-function onDataReceived(text) {
-  if ((text === 'quit\n') || (text === 'exit\n')) {
+function onDataReceived(mytext) {
+  
+  if ((mytext === 'quit\n') || (mytext === 'exit\n')) {
     quit();
   }
-  else if (text.slice(0, 5) === "hello") {
-    hello(text);
+  else if (mytext.slice(0, 5) === "hello") {
+    hello(mytext);
   }
-  else if (text === 'help\n') {
+  else if (mytext === 'help\n') {
     help();
   }
-  else if (text === 'list\n'){
+  else if (mytext === 'list\n'){
     list();
   }
-  else if (text.split(' ')[0].trim() === 'add'){
-    add(text.split(' ')[1]);
+  else if (mytext.split(' ')[0].trim() === 'add'){
+    add(mytext.split(' ')[1]);
   }
-  else if(text.slice(0,6)==='remove'){
-    remove(text.slice(6));
+  else if(mytext.slice(0,6)==='remove'){
+    remove(mytext.slice(6));
   }
-  else if(text.slice(0,4)==='edit'){
-    edit(text.slice(5));
+  else if(mytext.slice(0,4)==='edit'){
+    edit(mytext.slice(5));
+  }
+  else if (mytext.startsWith("check")) {
+      check(mytext);
+  } else if (mytext.startsWith("uncheck")) {
+      uncheck(mytext);
   }
   else {
-    unknownCommand(text);
+    unknownCommand(mytext);
   }
 }
 
@@ -102,7 +109,10 @@ function help() {
   console.log('pssible command lines: \nhello ---> says hello!\nhello X ----> says hello X!\nquit ---> quits the application\nexit ---> exits the application\nadd ---> adds a new task\nremove ---> removes a task\nlist --->lists all tasks')
 }
 
-const arrayList= ["T1", " T2", " T3"]
+
+var arrayList = [['[✓] ','1'],['[] ','2'],['[] ','3']];
+
+
 
 function list(){
    let x = arrayList.map(x => x+"\n")
@@ -131,10 +141,33 @@ function edit(text){
     arrayList.splice(0,2,text);
   }
   else if(typeof text.charAt(0) === "string"){
-      arrayList.pop();
-      arrayList.push(text);
+    arrayList.pop();
+    arrayList.push(text);
   }
   else if(typeof text.charAt(1) === "string"){
     arrayList.shift();
+  }
 }
+
+
+/**
+ * checks the unfinished task
+ *
+ * @checks {checks task}
+ */
+
+function check(text){
+  text = text.split(" ");
+  arrayList[text[1]-1][0] = '[✓]';
+}
+
+/**
+ * unchecks the unfinished task
+ *
+ * @unchecks {unchecks task}
+ */
+ 
+ function uncheck(text){
+  text = text.split(" ");
+  arrayList[text[1]-1][0] = '[]';
 }
