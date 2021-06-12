@@ -28,15 +28,12 @@ function startApp(name) {
   console.log("--------------------")
 }
 
-
 function writeToFile(){
   fs.writeFile('./database.json',JSON.stringify(arrayList),(error)=>{
       if(error) 
       throw error;
   });
 }
-
-
 
 function readFromDatabase(){
   try{
@@ -130,6 +127,7 @@ function hello(text) {
  * @returns {void}
  */
 function quit() {
+  fs.writeFileSync("database.json", JSON.stringify(arrayList));
   console.log('Quitting now, goodbye!');
   process.exit();
 }
@@ -143,10 +141,6 @@ startApp("Amira Ghraizy")
 function help() {
   console.log('pssible command lines: \nhello ---> says hello!\nhello X ----> says hello X!\nquit ---> quits the application\nexit ---> exits the application\nadd ---> adds a new task\nremove ---> removes a task\nlist --->lists all tasks')
 }
-
-
-
-
 
 done = [true, false];
 function list() {
@@ -188,8 +182,6 @@ function edit(text){
     arrayList.shift();
   }
 }
-
-
 
 /**
  * checks the unfinished task
