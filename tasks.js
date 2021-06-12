@@ -1,4 +1,9 @@
 
+const fs = require('fs');
+
+let database;
+let arrayList = [['[✓] ','T1'],['[] ','T2'],['[] ','T3']];
+
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -13,11 +18,36 @@ function startApp(name) {
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', onDataReceived);
+  if(process.argv[2] !== undefined){
+    database = process.argv[2];
+    writeToFile();
+    }else{
+        database = './database.json';
+    }
   console.log(`Welcome to ${name}'s application!`)
   console.log("--------------------")
 }
 
 
+function writeToFile(){
+  fs.writeFile('./database.json',JSON.stringify(arrayList),(error)=>{
+      if(error) 
+      throw error;
+  });
+}
+
+
+
+function readFromDatabase(){
+  try{
+      let contents = fs.readFileSync(database, 'utf8');
+      listOfTasks = JSON.parse(contents);
+      console.log("Reading from the database.json file:\n\n",listOfTasks)
+      console.log("\n")
+  }catch(error){
+      console.log(error);
+  }
+}
 
 /**
  * Decides what to do depending on the data that was received
@@ -46,21 +76,26 @@ function onDataReceived(mytext) {
     help();
   }
   else if (mytext === 'list\n'){
-    list();
+    readFromDatabase();
   }
   else if (mytext.split(' ')[0].trim() === 'add'){
     add(mytext.split(' ')[1]);
+    writeToFile();
   }
   else if(mytext.slice(0,6)==='remove'){
     remove(mytext.slice(6));
+    writeToFile();
   }
   else if(mytext.slice(0,4)==='edit'){
     edit(mytext.slice(5));
+    writeToFile();
   }
   else if (mytext.startsWith("check")) {
       check(mytext);
+      writeToFile();
   } else if (mytext.startsWith("uncheck")) {
       uncheck(mytext);
+      writeToFile();
   }
   else {
     unknownCommand(mytext);
@@ -95,7 +130,7 @@ function hello(text) {
  * @returns {void}
  */
 function quit() {
-  console.log('Quitting now, goodbye!')
+  console.log('Quitting now, goodbye!');
   process.exit();
 }
 
@@ -110,14 +145,19 @@ function help() {
 }
 
 
-var arrayList = [['[✓] ','1'],['[] ','2'],['[] ','3']];
 
 
 
-function list(){
-   let x = arrayList.map(x => x+"\n")
-   let y = x.toString().split(",").join("").trim()
-   console.log('To Do List:\n',y)
+done = [true, false];
+function list() {
+  for (var i = 0; i < arrayList.length; i++) {
+    if (done[i] == true) {
+      console.log(i + 1 + " - " + arrayList[i]);
+    }
+    else {
+      console.log(i + 1 + " - " + arrayList[i]);
+    }
+  }
 }
 
 function add(text){
@@ -150,6 +190,7 @@ function edit(text){
 }
 
 
+
 /**
  * checks the unfinished task
  *
@@ -159,6 +200,7 @@ function edit(text){
 function check(text){
   text = text.split(" ");
   arrayList[text[1]-1][0] = '[✓]';
+  writeToFile();
 }
 
 /**
@@ -170,4 +212,5 @@ function check(text){
  function uncheck(text){
   text = text.split(" ");
   arrayList[text[1]-1][0] = '[]';
+  writeToFile();
 }
