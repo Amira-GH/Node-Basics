@@ -38,8 +38,8 @@ function writeToFile(){
 function readFromDatabase(){
   try{
       let contents = fs.readFileSync(database, 'utf8');
-      listOfTasks = JSON.parse(contents);
-      console.log("Reading from the database.json file:\n\n",listOfTasks)
+      arrayList = JSON.parse(contents);
+      console.log("Reading from the database.json file:\n\n",arrayList)
       console.log("\n")
   }catch(error){
       console.log(error);
