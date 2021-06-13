@@ -43,6 +43,7 @@ function readFromDatabase(){
       console.log("\n")
   }catch(error){
       console.log(error);
+      //
   }
 }
 
